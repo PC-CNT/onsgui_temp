@@ -10,7 +10,7 @@ def open_input():
     root.withdraw()
     _path = filedialog.askdirectory()
     root.destroy()
-    dpg.set_value("input", _path)
+    dpg.set_value("input_dir", _path)
 
 
 def open_output():
@@ -18,7 +18,7 @@ def open_output():
     root.withdraw()
     _path = filedialog.askdirectory()
     root.destroy()
-    dpg.set_value("output", _path)
+    dpg.set_value("output_dir", _path)
 
 
 def close():
@@ -53,7 +53,7 @@ with dpg.window(label="Main Window", tag="Main Window"):
                 dpg.add_menu_item(label="SONY PlayStation Portable")
                 dpg.add_menu_item(label="SONY PlayStation Vita")
                 dpg.add_menu_item(label="その他(Android/Linux/WinCE...)")
-            
+
             dpg.add_menu_item(label="終了", callback=close)
 
         with dpg.menu(label="ツール"):
@@ -63,14 +63,18 @@ with dpg.window(label="Main Window", tag="Main Window"):
             dpg.add_menu_item(label="権利者表記", callback=copyrights)
 
     with dpg.group(horizontal=True):
-        dpg.add_text("入力元：")
-        dpg.add_input_text(tag="input", readonly = True)
-        dpg.add_button(label="Browse", callback=open_input)
+        dpg.add_text("入力元：　")
+        dpg.add_input_text(tag="input_dir", readonly=True)
+        dpg.add_button(label="Browse", callback=open_input, tag="input_browse_btn")
 
     with dpg.group(horizontal=True):
-        dpg.add_text("出力先：")
-        dpg.add_input_text(tag="output", readonly = True)
-        dpg.add_button(label="Browse", callback=open_output)
+        dpg.add_text("出力先：　")
+        dpg.add_input_text(tag="output_dir", readonly=True)
+        dpg.add_button(label="Browse", callback=open_output, tag="output_browse_btn")
+
+    with dpg.group(horizontal=True):
+        dpg.add_text("個別設定：")
+        dpg.add_combo(tag="title_setting", items=["未指定"], default_value="未指定", )
 
     with dpg.tab_bar():
         with dpg.tab(label="画像"):
@@ -86,7 +90,9 @@ with dpg.window(label="Main Window", tag="Main Window"):
         dpg.add_progress_bar(default_value=0, overlay="0%")
         dpg.add_button(label="Convert")
 
-window_title = "ONScripter Multi Converter for ver.2.0.0"
+work_name = ""
+
+window_title = f"ONScripter Multi Converter for {work_name} ver.2.0.0"
 
 
 def main():
