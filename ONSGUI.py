@@ -83,10 +83,15 @@ with dpg.window(label="Main Window", tag="Main Window"):
                     dpg.add_text("JPEG品質：")
                     dpg.add_slider_int(label="", default_value=100, min_value=0, max_value=100, tag="img_jpgquality_bar")
                 with dpg.group(horizontal=True):
-                    dpg.add_checkbox(label="PNGを減色：")
                     dpg.add_combo(("256", "192", "128"), label="色", default_value="256")
+                    dpg.add_checkbox(label="PNGを減色：", tag="img_pngquantize_chk")
+                    dpg.add_combo(label="色", items=("256", "192", "128"), default_value="256", fit_width=True, tag="img_pngquantize_num")
             with dpg.tree_node(label="詳細設定", default_open=True):
-                dpg.add_text("画像ファイル一覧")
+                dpg.add_checkbox(label="""透過形式"l","r"以外のBMPを検出しJPEGへ変換""", tag="img_bmptojpg_chk")
+                dpg.add_checkbox(label="""透過形式"l","r"のBMPを検出しGIFへ変換""", tag="img_bmptogif_chk")
+                with dpg.group(horizontal=True):
+                    dpg.add_checkbox(label="""一般的な非PNGの横解像度を特定の倍数にする：""", tag="img_multi_chk")
+                    dpg.add_combo(label="の倍数", items=("1", "2", "3", "4",), default_value="1", fit_width=True, tag="img_multi_num",)
         with dpg.tab(label="音楽"):
             dpg.add_input_text()
         with dpg.tab(label="動画"):
