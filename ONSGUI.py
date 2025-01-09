@@ -83,7 +83,6 @@ with dpg.window(label="Main Window", tag="Main Window"):
                     dpg.add_text("JPEG品質：")
                     dpg.add_slider_int(label="", default_value=100, min_value=0, max_value=100, tag="img_jpgquality_bar")
                 with dpg.group(horizontal=True):
-                    dpg.add_combo(("256", "192", "128"), label="色", default_value="256")
                     dpg.add_checkbox(label="PNGを減色：", tag="img_pngquantize_chk")
                     dpg.add_combo(label="色", items=("256", "192", "128"), default_value="256", fit_width=True, tag="img_pngquantize_num")
             with dpg.tree_node(label="詳細設定", default_open=True):
@@ -93,7 +92,19 @@ with dpg.window(label="Main Window", tag="Main Window"):
                     dpg.add_checkbox(label="""一般的な非PNGの横解像度を特定の倍数にする：""", tag="img_multi_chk")
                     dpg.add_combo(label="の倍数", items=("1", "2", "3", "4",), default_value="1", fit_width=True, tag="img_multi_num",)
         with dpg.tab(label="音楽"):
-            dpg.add_input_text()
+            with dpg.tree_node(label="基本設定", default_open=True):
+                with dpg.group(horizontal=True):
+                    dpg.add_text("BGMフォーマット：")
+                    dpg.add_radio_button(items=("OGG", "MP3", "WAV"), default_value="OGG", horizontal=True, tag="aud_bgmfmt_radio")
+                with dpg.group(horizontal=True):
+                    dpg.add_text("SE/VOICEフォーマット：")
+                    dpg.add_radio_button(items=("OGG", "MP3", "WAV"), default_value="OGG", horizontal=True, tag="aud_sefmt_radio")
+                with dpg.group(horizontal=True):
+                    dpg.add_text("SE/BGMチャンネル数：")
+                    dpg.add_radio_button(items=("ステレオ", "モノラル"), default_value="ステレオ", horizontal=True, tag="aud_bgmch_radio")
+                with dpg.group(horizontal=True):
+                    dpg.add_text("SE/SE/VOICEチャンネル数：")
+                    dpg.add_radio_button(items=("ステレオ", "モノラル"), default_value="ステレオ", horizontal=True, tag="aud_sech_radio")
         with dpg.tab(label="動画"):
             dpg.add_input_text()
         with dpg.tab(label="その他"):
