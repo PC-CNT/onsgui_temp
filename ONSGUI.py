@@ -78,7 +78,15 @@ with dpg.window(label="Main Window", tag="Main Window"):
 
     with dpg.tab_bar():
         with dpg.tab(label="画像"):
-            dpg.add_input_text()
+            with dpg.tree_node(label="基本設定", default_open=True):
+                with dpg.group(horizontal=True):
+                    dpg.add_text("JPEG品質：")
+                    dpg.add_slider_int(label="", default_value=100, min_value=0, max_value=100, tag="img_jpgquality_bar")
+                with dpg.group(horizontal=True):
+                    dpg.add_checkbox(label="PNGを減色：")
+                    dpg.add_combo(("256", "192", "128"), label="色", default_value="256")
+            with dpg.tree_node(label="詳細設定", default_open=True):
+                dpg.add_text("画像ファイル一覧")
         with dpg.tab(label="音楽"):
             dpg.add_input_text()
         with dpg.tab(label="動画"):
