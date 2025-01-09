@@ -104,7 +104,45 @@ with dpg.window(label="Main Window", tag="Main Window"):
                     dpg.add_radio_button(items=("ステレオ", "モノラル"), default_value="ステレオ", horizontal=True, tag="aud_bgmch_radio")
                 with dpg.group(horizontal=True):
                     dpg.add_text("SE/SE/VOICEチャンネル数：")
-                    dpg.add_radio_button(items=("ステレオ", "モノラル"), default_value="ステレオ", horizontal=True, tag="aud_sech_radio")
+                    dpg.add_radio_button(items=("ステレオ", "モノラル"), default_value="モノラル", horizontal=True, tag="aud_sech_radio")
+            with dpg.tree_node(label="詳細設定", default_open=True):
+                with dpg.tree_node(label="OGG変換時", default_open=True):
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("BGMビットレート：")
+                        dpg.add_combo(label="kbps", items=("192", "160", "128", "112", "96", "64", "56", "48", "32"), default_value="192", fit_width=True, tag="aud_oggbgm_kbps")
+                        dpg.add_combo(label="Hz", items=("44100", "22050", "11025"), default_value="44100", fit_width=True, tag="aud_oggbgm_hz")
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("SE/VOICEビットレート：")
+                        dpg.add_combo(label="kbps", items=("192", "160", "128", "112", "96", "64", "56", "48", "32"), default_value="56", fit_width=True, tag="aud_oggse_kbps")
+                        dpg.add_combo(label="Hz", items=("44100", "22050", "11025"), default_value="22050", fit_width=True, tag="aud_oggse_hz")
+                with dpg.tree_node(label="MP3変換時", default_open=True):
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("BGMビットレート：")
+                        dpg.add_combo(label="kbps", items=("192", "160", "128", "112", "96", "64", "56", "48", "32"), default_value="128", fit_width=True, tag="aud_mp3bgm_kbps")
+                        dpg.add_combo(label="Hz", items=("44100", "22050", "11025"), default_value="44100", fit_width=True, tag="aud_mp3bgm_hz")
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("SE/VOICEビットレート：")
+                        dpg.add_combo(label="kbps", items=("192", "160", "128", "112", "96", "64", "56", "48", "32"), default_value="96", fit_width=True, tag="aud_mp3se_kbps")
+                        dpg.add_combo(label="Hz", items=("44100", "22050", "11025"), default_value="22050", fit_width=True, tag="aud_mp3se_hz")
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("BGMカットオフ周波数：")
+                        dpg.add_combo(label="Hz", items=("18000", "16500", "15000", "13500", "12000", "10500", "9000", "7500"), default_value="15000", fit_width=True, tag="aud_mp3bgm_cutoff")
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("SE/VOICEカットオフ周波数：")
+                        dpg.add_combo(label="Hz", items=("18000", "16500", "15000", "13500", "12000", "10500", "9000", "7500"), default_value="12000", fit_width=True, tag="aud_mp3se_cutoff")
+                with dpg.tree_node(label="WAV変換時", default_open=True):
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("BGMビットレート：")
+                        dpg.add_combo(label="Hz", items=("44100", "22050", "11025"), default_value="44100", fit_width=True, tag="aud_wavbgm_hz")
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("SE/VOICEビットレート：")
+                        dpg.add_combo(label="Hz", items=("44100", "22050", "11025"), default_value="22050", fit_width=True, tag="aud_wavse_hz")
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("BGMコーデック：")
+                        dpg.add_radio_button(items=("pcm_s16le", "pcm_u8"), default_value="pcm_s16le", horizontal=True,  tag="aud_bgmcodec_radio")
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("SEコーデック：")
+                        dpg.add_radio_button(items=("pcm_s16le", "pcm_u8"), default_value="pcm_s16le", horizontal=True,  tag="aud_secodec_radio")
         with dpg.tab(label="動画"):
             dpg.add_input_text()
         with dpg.tab(label="その他"):
@@ -120,7 +158,7 @@ window_title = f"ONScripter Multi Converter for {work_name} ver.2.0.0"
 
 
 def main():
-    dpg.create_viewport(title=window_title, width=1280, height=720)
+    dpg.create_viewport(title=window_title, width=1280, height=720, resizable=False)
     dpg.set_primary_window("Main Window", True)
     dpg.setup_dearpygui()
     dpg.show_viewport()
