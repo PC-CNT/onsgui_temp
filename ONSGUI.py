@@ -451,7 +451,7 @@ with dpg.window(label="Main Window", tag="Main Window"):
             with dpg.tree_node(label="基本設定", default_open=True):
                 with dpg.tree_node(label="ファイル関連", default_open=True):
                     with dpg.group(horizontal=True):
-                        dpg.add_input_text(label="画像圧縮先：")
+                        dpg.add_text("画像圧縮先：")
                         dpg.add_combo(
                             label="",
                             items=("arc.nsa", "arc1.nsa", "arc2.nsa", "圧縮しない"),
@@ -459,6 +459,28 @@ with dpg.window(label="Main Window", tag="Main Window"):
                             fit_width=True,
                             tag="etc_filecompimg_nsa",
                         )
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("BGM圧縮先：")
+                        dpg.add_combo(
+                            label="",
+                            items=("arc.nsa", "arc1.nsa", "arc2.nsa", "圧縮しない"),
+                            default_value="arc1.nsa",
+                            fit_width=True,
+                            tag="etc_filecompbgm_nsa",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("SE/VOICE圧縮先：")
+                        dpg.add_combo(
+                            label="",
+                            items=("arc.nsa", "arc1.nsa", "arc2.nsa", "圧縮しない"),
+                            default_value="arc2.nsa",
+                            fit_width=True,
+                            tag="etc_filecompse_nsa",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(label="""拡張子".dll"のファイルを全て除外""", default_value=True, tag="etc_fileexdll_chk")
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(label="""ファイル"Thumbs.db"を全て除外""", default_value=True, tag="etc_fileexdb_chk")
             with dpg.tree_node(label="詳細設定", default_open=True):
                 with dpg.tree_node(label="0.txt関連", default_open=True):
                     with dpg.group(horizontal=True):
@@ -467,7 +489,7 @@ with dpg.window(label="Main Window", tag="Main Window"):
                             items=("変換後のファイルを拡張子nbzとwavで両方用意しておく", """0.txtを".nbz"→".wav"で一括置換"""),
                             default_value="""0.txtを".nbz"→".wav"で一括置換""",
                             horizontal=True,
-                            tag="etc_0txtnbz_radio ",
+                            tag="etc_0txtnbz_radio",
                         )
 
     with dpg.group(horizontal=True):
