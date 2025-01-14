@@ -478,15 +478,46 @@ with dpg.window(label="Main Window", tag="Main Window"):
                             tag="etc_filecompse_nsa",
                         )
                     with dpg.group(horizontal=True):
-                        dpg.add_checkbox(label="""拡張子".dll"のファイルを全て除外""", default_value=True, tag="etc_fileexdll_chk")
+                        dpg.add_checkbox(
+                            label="""拡張子".dll"のファイルを全て除外""",
+                            default_value=True,
+                            tag="etc_fileexdll_chk",
+                        )
                     with dpg.group(horizontal=True):
-                        dpg.add_checkbox(label="""ファイル"Thumbs.db"を全て除外""", default_value=True, tag="etc_fileexdb_chk")
+                        dpg.add_checkbox(
+                            label="""ファイル"Thumbs.db"を全て除外""",
+                            default_value=True,
+                            tag="etc_fileexdb_chk",
+                        )
+                with dpg.tree_node(label="ons.ini関連(PSP用)", default_open=True):
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("画面表示：")
+                        dpg.add_combo(
+                            label="",
+                            items=("拡大しない", "拡大(比率維持)", "拡大(フルサイズ)"),
+                            default_value="拡大(比率維持)",
+                            fit_width=True,
+                            tag="etc_iniscreen",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="常にメモリ内にフォントを読み込んでおく",
+                            default_value=True,
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="マウスカーソルを利用",
+                            default_value=False,
+                        )
             with dpg.tree_node(label="詳細設定", default_open=True):
                 with dpg.tree_node(label="0.txt関連", default_open=True):
                     with dpg.group(horizontal=True):
                         dpg.add_input_text(label="nbz変換設定：")
                         dpg.add_radio_button(
-                            items=("変換後のファイルを拡張子nbzとwavで両方用意しておく", """0.txtを".nbz"→".wav"で一括置換"""),
+                            items=(
+                                "変換後のファイルを拡張子nbzとwavで両方用意しておく",
+                                """0.txtを".nbz"→".wav"で一括置換""",
+                            ),
                             default_value="""0.txtを".nbz"→".wav"で一括置換""",
                             horizontal=True,
                             tag="etc_0txtnbz_radio",
