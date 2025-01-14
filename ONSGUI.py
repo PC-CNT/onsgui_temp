@@ -512,7 +512,7 @@ with dpg.window(label="Main Window", tag="Main Window"):
             with dpg.tree_node(label="詳細設定", default_open=True):
                 with dpg.tree_node(label="0.txt関連", default_open=True):
                     with dpg.group(horizontal=True):
-                        dpg.add_input_text(label="nbz変換設定：")
+                        dpg.add_text("nbz変換設定：")
                         dpg.add_radio_button(
                             items=(
                                 "変換後のファイルを拡張子nbzとwavで両方用意しておく",
@@ -522,7 +522,72 @@ with dpg.window(label="Main Window", tag="Main Window"):
                             horizontal=True,
                             tag="etc_0txtnbz_radio",
                         )
-
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("avi命令→mpegplay命令変換：")
+                        dpg.add_combo(
+                            items=(
+                                "利用する(関数上書き)",
+                                "利用する(正規表現置換)",
+                                "利用しない",
+                            ),
+                            default_value="利用する(関数上書き)",
+                            fit_width=True,
+                            tag="etc_0txtavitompegplay",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_text("screenshot系命令無効化：")
+                        dpg.add_combo(
+                            items=(
+                                "利用する(関数上書き)",
+                                "利用する(正規表現置換)",
+                                "利用しない",
+                            ),
+                            default_value="利用する(関数上書き)",
+                            fit_width=True,
+                            tag="etc_0txtnoscreenshot",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="低容量RAM搭載端末用maxkaisoupage最大値指定：",
+                            default_value=True,
+                            tag="etc_0txtmaxkaisoupage_chk",
+                        )
+                        dpg.add_combo(
+                            items=("1", "3", "5", "10", "20"),
+                            default_value="3",
+                            fit_width=True,
+                            tag="etc_0txtmaxkaisoupage_num",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="低解像度端末用setwindow/setwindow3文字潰れ防止",
+                            default_value=True,
+                            tag="etc_0txtsetwindowbigfont_chk",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="okcancelbox命令強制ok",
+                            default_value=True,
+                            tag="etc_0txtskipokcancelbox_chk",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="yesnobox命令強制yes",
+                            default_value=True,
+                            tag="etc_0txtskipyesnobox_chk",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="rnd2命令→rnd命令変換",
+                            default_value=True,
+                            tag="etc_0txtrndtornd2_chk",
+                        )
+                    with dpg.group(horizontal=True):
+                        dpg.add_checkbox(
+                            label="変換ファイル総数/処理時間/設定を末尾に記載",
+                            default_value=True,
+                            tag="etc_0txtresult0txt_chk",
+                        )
     with dpg.group(horizontal=True):
         dpg.add_progress_bar(default_value=0, overlay="0%")
         dpg.add_button(label="Convert")
