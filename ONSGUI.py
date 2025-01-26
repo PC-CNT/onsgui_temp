@@ -35,19 +35,33 @@ def copyrights():
     print("copyrights")
     return
 
+version = "2.0.0"
 
 state_default = {
+    "viewport_title": f"ONScripter Multi Converter ver.{version}",
     "img_jpgquality_bar": 100,
     "img_pngquantize_chk": False,
     "img_pngquantize_num": "256",
 }
 
 state_psp = {
+    "viewport_title": f"ONScripter Multi Converter for PSP ver.{version}",
     "img_jpgquality_bar": 50,
 }
 
-def refresh_window(sender, app_data, user_data = state_default):
-    for key, value in user_data.items():
+state_psvita = {
+    "viewport_title": f"ONScripter Multi Converter for PSVita ver.{version}",
+}
+
+state_other = {
+    "viewport_title": f"ONScripter Multi Converter for Other ver.{version}",
+}
+
+def refresh_state(sender, app_data, user_data = state_default):
+    state = user_data.copy()
+    if state.get("viewport_title"):
+        dpg.set_viewport_title(state.pop("viewport_title"))
+    for key, value in state.items():
         dpg.set_value(key, value)
     return
 
@@ -66,9 +80,9 @@ with dpg.window(label="Main Window", tag="Main Window", no_resize=True):
     with dpg.menu_bar():
         with dpg.menu(label="設定"):
             with dpg.menu(label="ハード変更"):
-                dpg.add_menu_item(label="SONY PlayStation Portable", callback=refresh_window, user_data=state_psp)
-                dpg.add_menu_item(label="SONY PlayStation Vita",)
-                dpg.add_menu_item(label="その他(Android/Linux/WinCE...)",)
+                dpg.add_menu_item(label="SONY PlayStation Portable", callback=refresh_state, user_data=state_psp)
+                dpg.add_menu_item(label="SONY PlayStation Vita", callback=refresh_state, user_data=state_psvita)
+                dpg.add_menu_item(label="その他(Android/Linux/WinCE...)", callback=refresh_state, user_data=state_other)
 
             dpg.add_menu_item(label="終了", callback=close)
 
@@ -615,9 +629,7 @@ with dpg.window(label="Main Window", tag="Main Window", no_resize=True):
         dpg.add_progress_bar(default_value=0, overlay="0%")
         dpg.add_button(label="Convert")
 
-work_name = ""
-
-window_title = f"ONScripter Multi Converter for {work_name} ver.2.0.0"
+window_title = f"ONScripter Multi Converter ver.{version}"
 
 def main():
     dpg.create_viewport(title=window_title, width=640, height=400, resizable=False)
