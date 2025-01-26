@@ -1,6 +1,7 @@
 import os
 import tkinter
 import tkinter.filedialog as filedialog
+import tkinter.messagebox
 
 import dearpygui.dearpygui as dpg
 
@@ -35,6 +36,21 @@ def copyrights():
     return
 
 
+state_default = {
+    "img_jpgquality_bar": 100,
+    "img_pngquantize_chk": False,
+    "img_pngquantize_num": "256",
+}
+
+state_psp = {
+    "img_jpgquality_bar": 50,
+}
+
+def refresh_window(sender, app_data, user_data = state_default):
+    for key, value in user_data.items():
+        dpg.set_value(key, value)
+    return
+
 dpg.create_context()
 
 font_path = r"C:\Windows\Fonts\meiryo.ttc"
@@ -50,9 +66,9 @@ with dpg.window(label="Main Window", tag="Main Window", no_resize=True):
     with dpg.menu_bar():
         with dpg.menu(label="設定"):
             with dpg.menu(label="ハード変更"):
-                dpg.add_menu_item(label="SONY PlayStation Portable", check=True, default_value=True)
-                dpg.add_menu_item(label="SONY PlayStation Vita", check=True)
-                dpg.add_menu_item(label="その他(Android/Linux/WinCE...)", check=True)
+                dpg.add_menu_item(label="SONY PlayStation Portable", callback=refresh_window, user_data=state_psp)
+                dpg.add_menu_item(label="SONY PlayStation Vita",)
+                dpg.add_menu_item(label="その他(Android/Linux/WinCE...)",)
 
             dpg.add_menu_item(label="終了", callback=close)
 
@@ -602,10 +618,6 @@ with dpg.window(label="Main Window", tag="Main Window", no_resize=True):
 work_name = ""
 
 window_title = f"ONScripter Multi Converter for {work_name} ver.2.0.0"
-
-default_psp = {
-    
-}
 
 def main():
     dpg.create_viewport(title=window_title, width=640, height=400, resizable=False)
