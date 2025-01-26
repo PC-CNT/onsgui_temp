@@ -65,6 +65,17 @@ def refresh_state(sender, app_data, user_data = state_default):
         dpg.set_value(key, value)
     return
 
+
+def convert():
+    state_result = {}
+    # for i in dpg.get_all_items():
+        # print(dpg.get_item_info(i))
+    for i in dpg.get_aliases():
+        state_result[i] = dpg.get_value(i)
+        # print(dpg.get_item_type(i))
+    print(state_result)
+
+
 dpg.create_context()
 
 font_path = r"C:\Windows\Fonts\meiryo.ttc"
@@ -76,7 +87,7 @@ with dpg.font_registry():
     with dpg.font(file=font_path, size=14) as small_font:
         dpg.add_font_range_hint(dpg.mvFontRangeHint_Japanese)
 
-with dpg.window(label="Main Window", tag="Main Window", no_resize=True):
+with dpg.window(label="Main Window", tag="Main Window", no_resize=True) as window:
     with dpg.menu_bar():
         with dpg.menu(label="設定"):
             with dpg.menu(label="ハード変更"):
@@ -627,7 +638,7 @@ with dpg.window(label="Main Window", tag="Main Window", no_resize=True):
                             )
     with dpg.group(horizontal=True):
         dpg.add_progress_bar(default_value=0, overlay="0%")
-        dpg.add_button(label="Convert")
+        dpg.add_button(label="Convert", callback=convert, tag="convert_button")
 
 window_title = f"ONScripter Multi Converter ver.{version}"
 
