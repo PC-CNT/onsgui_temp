@@ -2,6 +2,7 @@ import os
 import tkinter
 import tkinter.filedialog as filedialog
 import tkinter.messagebox
+import time
 
 import dearpygui.dearpygui as dpg
 
@@ -73,6 +74,11 @@ def convert():
     for i in dpg.get_aliases():
         state_result[i] = dpg.get_value(i)
         # print(dpg.get_item_type(i))
+    p = 0.01
+    for i in range(100):
+        dpg.set_value("convert_progress", p)
+        p += 0.01
+        time.sleep(0.08)
     print(state_result)
 
 
@@ -637,7 +643,7 @@ with dpg.window(label="Main Window", tag="Main Window", no_resize=True) as windo
                                 tag="etc_0txtresult0txt_chk",
                             )
     with dpg.group(horizontal=True):
-        dpg.add_progress_bar(default_value=0, overlay="0%")
+        dpg.add_progress_bar(default_value=0, overlay="", tag="convert_progress")
         dpg.add_button(label="Convert", callback=convert, tag="convert_button")
 
 window_title = f"ONScripter Multi Converter ver.{version}"
