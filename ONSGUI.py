@@ -37,7 +37,7 @@ def copyrights():
 
 dpg.create_context()
 
-font_path = r"C:\Windows\Fonts\ipaexg.ttf"
+font_path = r"C:\Windows\Fonts\meiryo.ttc"
 
 with dpg.font_registry():
     with dpg.font(file=font_path, size=16) as default_font:
